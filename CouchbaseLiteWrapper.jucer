@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="yGMV7e" name="CouchbaseLiteWrapper" projectType="consoleapp"
+              version="0.0.1" bundleIdentifier="com.codegarden.CouchbaseLiteWrapper"
+              includeBinaryInAppConfig="1" jucerVersion="4.3.0">
+  <MAINGROUP id="H8hDgx" name="CouchbaseLiteWrapper">
+    <GROUP id="{542F69D2-F40A-C017-7A49-23840A5710F5}" name="Source">
+      <FILE id="lajMp7" name="CBLWrapper.h" compile="0" resource="0" file="Source/CBLWrapper.h"/>
+      <FILE id="pYBkqj" name="CBLWrapper.mm" compile="1" resource="0" file="Source/CBLWrapper.mm"/>
+      <FILE id="FqeyzI" name="DatabaseController.h" compile="0" resource="0"
+            file="Source/DatabaseController.h"/>
+      <FILE id="Ell35E" name="DatabaseController.m" compile="1" resource="0"
+            file="Source/DatabaseController.m"/>
+      <FILE id="Ke7uiN" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX" externalLibraries="sqlite3&#10;z&#10;"
+               extraFrameworks="CouchbaseLite, CFNetwork, Security, SystemConfiguration">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="CouchbaseLiteWrapper"
+                       osxCompatibility="10.9 SDK" osxSDK="default" customXcodeFlags="FRAMEWORK_SEARCH_PATHS=&quot;$(inherited) /Users/adamelemental/dev/CouchBase/couchbase-lite-macosx-enterprise_1.4.0-3&quot;"
+                       libraryPath="/Users/adamelemental/dev/CouchBase/couchbase-lite-macosx-enterprise_1.4.0-3/Extras"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="CouchbaseLiteWrapper"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <VS2015 targetFolder="Builds/VisualStudio2015">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="CouchbaseLiteWrapper"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="CouchbaseLiteWrapper"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2015>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0"/>
+  </MODULES>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>
