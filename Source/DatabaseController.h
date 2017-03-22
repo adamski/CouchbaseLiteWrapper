@@ -14,6 +14,8 @@
 @interface DatabaseController: NSObject //<UIApplicationDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) CBLDatabase *database;
+@property (nonatomic, strong) NSString *databaseName;
+@property (nonatomic, strong) NSURL *remoteSyncURL;
 
 //- (void)showAlert: (NSString*)message error: (NSError*)error fatal: (BOOL)fatal;
 
