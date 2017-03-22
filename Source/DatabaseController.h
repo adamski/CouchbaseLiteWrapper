@@ -17,7 +17,8 @@
 @property (nonatomic, strong) NSString *databaseName;
 @property (nonatomic, strong) NSURL *remoteSyncURL;
 
-//- (void)showAlert: (NSString*)message error: (NSError*)error fatal: (BOOL)fatal;
+- (id) initWithDbName: (NSString*) databaseName;
+- (id) initWithDbName: (NSString*) dbName andServerDbURL: (NSString*) serverDbURL;
 
 @end
 

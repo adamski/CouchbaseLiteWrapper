@@ -8,12 +8,22 @@
 
 #import <Foundation/Foundation.h>
 #import <Couchbaselite/CouchbaseLite.h>
+#import "DatabaseController.h"
 
 #include "CBLWrapper.h"
 
 CBLWrapper::CBLWrapper (String databaseName, String serverDbURL)
 {
-    NSError* error;
     NSString* dbName = [NSString stringWithUTF8String: databaseName.toUTF8()];
-    database = [[CBLManager sharedInstance] databaseNamed: dbName  error: &error];
+    NSString* dbURL = [NSString stringWithUTF8String: databaseName.toUTF8()];
+    
+    @try
+    {
+        databaseController = [[DatabaseController alloc] initWithDbName:dbName andServerDbURL:dbURL];
+    }
+    @catch (NSException* exception)
+    {
+        DBG ([[exception reason] UTF8String]);
+    }
+    
 }

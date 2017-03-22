@@ -35,7 +35,7 @@
     return self;
 }
 
-- (id) initWithDbName: (NSString*) dbName andSarverDbURL: (NSString*) serverDbURL
+- (id) initWithDbName: (NSString*) dbName andServerDbURL: (NSString*) serverDbURL
 {
     self = [self initWithDbName:dbName];
     if (self)

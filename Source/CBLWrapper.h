@@ -15,7 +15,7 @@ class CBLWrapper
 {
     CBLWrapper (String databaseName, String serverDbURL);
 private:
-    void* database;
+    void* databaseController;
 };
 
 #endif /* CBLWrapper_h */
