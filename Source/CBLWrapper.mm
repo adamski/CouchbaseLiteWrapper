@@ -84,6 +84,20 @@ namespace adamski
         }
     }
     
+    CBLWrapper::~CBLWrapper()
+    {
+        if (impl)
+        {
+            [impl->database release];
+            [impl->pull release];
+            [impl->push release];
+            [impl->remoteSyncURL release];
+            [impl->syncError release];
+        }
+        
+        delete impl;
+    }
+    
     void CBLWrapper::createDocument(String jsonDocument)
     {
         NSError* jsonError;
