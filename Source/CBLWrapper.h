@@ -11,11 +11,16 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-class CBLWrapper
+namespace adamski
 {
-    CBLWrapper (String databaseName, String serverDbURL);
-private:
-    void* databaseController;
-};
-
+    struct CBLWrapperImpl;
+    class CBLWrapper
+    {
+        CBLWrapperImpl* impl;
+    public:
+        CBLWrapper(String databaseName, String serverDbURL);
+        ~CBLWrapper();
+        void createDocument(String jsonDocument);
+    };
+}
 #endif /* CBLWrapper_h */
