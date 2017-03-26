@@ -10,11 +10,13 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
+#include "Database.h"
 
 //==============================================================================
 int main (int argc, char* argv[])
 {
 
+    cbl::Database database("MyDb", String::empty);
     // ..your code goes here!
 
 

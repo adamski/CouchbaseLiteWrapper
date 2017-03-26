@@ -5,12 +5,8 @@
               includeBinaryInAppConfig="1" jucerVersion="4.3.0">
   <MAINGROUP id="H8hDgx" name="CouchbaseLiteWrapper">
     <GROUP id="{542F69D2-F40A-C017-7A49-23840A5710F5}" name="Source">
-      <FILE id="lajMp7" name="CBLWrapper.h" compile="0" resource="0" file="Source/CBLWrapper.h"/>
-      <FILE id="pYBkqj" name="CBLWrapper.mm" compile="1" resource="0" file="Source/CBLWrapper.mm"/>
-      <FILE id="FqeyzI" name="DatabaseController.h" compile="0" resource="0"
-            file="Source/DatabaseController.h"/>
-      <FILE id="Ell35E" name="DatabaseController.m" compile="1" resource="0"
-            file="Source/DatabaseController.m"/>
+      <FILE id="Wfp4aq" name="Database.h" compile="0" resource="0" file="Source/Database.h"/>
+      <FILE id="VNwZ03" name="Database.mm" compile="1" resource="0" file="Source/Database.mm"/>
       <FILE id="Ke7uiN" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>
   </MAINGROUP>

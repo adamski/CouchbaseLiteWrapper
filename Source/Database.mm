@@ -1,5 +1,5 @@
 //
-//  CBLWrapper.m
+//  Database.mm
 //  CouchbaseLiteWrapper
 //
 //  Created by Adam Wilson on 22/03/2017.
@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <Couchbaselite/CouchbaseLite.h>
 
-#include "CBLWrapper.h"
+#include "Database.h"
 
-namespace adamski {
-    struct CBLWrapperImpl {
+namespace cbl {
+    struct DatabaseImpl {
         CBLDatabase *database;
 
         NSURL *remoteSyncURL;
@@ -21,7 +21,7 @@ namespace adamski {
         NSError *syncError;
     };
 
-    CBLWrapper::CBLWrapper(String databaseName, String serverDbURL) : impl(new CBLWrapperImpl) {
+    Database::Database(String databaseName, String serverDbURL /* = String::empty */) : impl(new DatabaseImpl) {
         NSError *error;
         NSString *dbName = [NSString stringWithUTF8String:databaseName.toUTF8()];
 
@@ -79,7 +79,7 @@ namespace adamski {
         }
     }
 
-    CBLWrapper::~CBLWrapper() {
+    Database::~Database() {
         if (impl) {
             [impl->database release];
 
@@ -92,12 +92,12 @@ namespace adamski {
         delete impl;
     }
 
-    String CBLWrapper::createDocument(String documentId /* = String::empty */) {
+    String Database::createDocument(String documentId /* = String::empty */) {
         CBLDocument *document = [impl->database createDocument];
         return String([[document documentID] UTF8String]);
     }
 
-    Result CBLWrapper::updateDocument(String documentId, String jsonDocument) {
+    Result Database::updateDocument(String documentId, String jsonDocument) {
         NSString *docId = [NSString stringWithUTF8String:documentId.toUTF8()];
         CBLDocument *document = [impl->database documentWithID:docId];
 
