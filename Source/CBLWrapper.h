@@ -20,7 +20,8 @@ namespace adamski
     public:
         CBLWrapper(String databaseName, String serverDbURL);
         ~CBLWrapper();
-        void createDocument(String jsonDocument);
+        String createDocument(String documentId = String::empty);
+        Result updateDocument(String documentId, String jsonDocument);
     };
 }
 #endif /* CBLWrapper_h */
