@@ -10,6 +10,7 @@
 #import <Couchbaselite/CouchbaseLite.h>
 
 #include "Database.h"
+#include <iostream>
 
 namespace cbl {
     struct DatabaseImpl {
@@ -21,21 +22,22 @@ namespace cbl {
         NSError *syncError;
     };
 
-    Database::Database(String databaseName, String serverDbURL /* = String::empty */) : impl(new DatabaseImpl) {
+    Database::Database(std::string databaseName, std::string serverDbURL /* = "" */) : impl(new DatabaseImpl) {
         NSError *error;
-        NSString *dbName = [NSString stringWithUTF8String:databaseName.toUTF8()];
+        NSString *dbName = [NSString stringWithUTF8String:databaseName.c_str()];
 
 
         impl->database = [[CBLManager sharedInstance] databaseNamed:dbName error:&error];
         if (!impl->database) {
             const char *errorMessage = [error.localizedDescription UTF8String];
-            DBG ("Could not open database " << databaseName << ": " << errorMessage);
-            // Not sure if an exception is the best way to go but should do for now..
+            std::cerr << "Could not open database " << databaseName << ": " << errorMessage;
+
+            // Not sure if an exception is the best way to go but might do for now..
             //[NSException raise:@"Couldn't open database" format:@"Database named %@ could not be opened: %@", databaseName, error];
         }
 
-        if (serverDbURL.isNotEmpty()) {
-            NSString *serverDbURLString = [NSString stringWithUTF8String:serverDbURL.toUTF8()];
+        if (! serverDbURL.empty()) {
+            NSString *serverDbURLString = [NSString stringWithUTF8String:serverDbURL.c_str()];
             impl->remoteSyncURL = [NSURL URLWithString:[serverDbURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 
             impl->pull = [impl->database createPullReplication:impl->remoteSyncURL];
@@ -92,17 +94,18 @@ namespace cbl {
         delete impl;
     }
 
-    String Database::createDocument(String documentId /* = String::empty */) {
+    std::string Database::createDocument(std::string documentId /* = "" */) {
         CBLDocument *document = [impl->database createDocument];
-        return String([[document documentID] UTF8String]);
+        return std::string([[document documentID] UTF8String]);
     }
 
-    Result Database::updateDocument(String documentId, String jsonDocument) {
-        NSString *docId = [NSString stringWithUTF8String:documentId.toUTF8()];
+    // Return _revID as part of tuple?
+    std::pair<bool, std::string> Database::updateDocument(std::string documentId, std::string jsonDocument) {
+        NSString *docId = [NSString stringWithUTF8String:documentId.c_str()];
         CBLDocument *document = [impl->database documentWithID:docId];
 
         NSError *jsonError;
-        NSString *jsonNSString = [NSString stringWithUTF8String:jsonDocument.toUTF8()];
+        NSString *jsonNSString = [NSString stringWithUTF8String:jsonDocument.c_str()];
         NSData *objectData = [jsonNSString dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *documentProperties = [NSJSONSerialization JSONObjectWithData:objectData
                                                                            options:NSJSONReadingMutableContainers
@@ -110,10 +113,11 @@ namespace cbl {
         NSError *error;
         if (![document putProperties:documentProperties error:&error]) {
             const char *errorMessage = [error.localizedDescription UTF8String];
-            DBG ("Could not save document: " << errorMessage);
-            return Result::fail(errorMessage);
+            std::cerr << "Could not save document: " << errorMessage;
+            return {false, errorMessage};
         }
-        return Result::ok();
+
+        return {true, ""};
     }
     
     

@@ -16,7 +16,7 @@
 int main (int argc, char* argv[])
 {
 
-    cbl::Database database("MyDb", String::empty);
+    cbl::Database database("MyDb");
     // ..your code goes here!
 
 

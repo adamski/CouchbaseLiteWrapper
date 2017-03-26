@@ -9,10 +9,10 @@
 #ifndef Database_h
 #define Database_h
 
+#include <string>
+
 /** Note: https://github.com/couchbase/couchbase-lite-ios/wiki/JavaScript-Views
  */
-
-#include "../JuceLibraryCode/JuceHeader.h"
 
 namespace cbl
 {
@@ -21,11 +21,11 @@ namespace cbl
     {
         DatabaseImpl* impl;
     public:
-        Database(String databaseName, String serverDbURL = String::empty);
+        Database(std::string databaseName, std::string serverDbURL = "");
         ~Database();
-        String createDocument(String documentId = String::empty);
-        Result updateDocument(String documentId, String jsonDocument);
-        String readDocument(String documentId);
+        std::string createDocument(std::string documentId = "");
+        std::pair<bool,std::string> updateDocument(std::string documentId, std::string jsonDocument);
+        std::string readDocument(std::string documentId);
     };
 }
 #endif /* Database_h */
